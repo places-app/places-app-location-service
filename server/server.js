@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
 
 app.post('/api/users/:userId/location', routeHanlders.updateLocation);
 
-app.post('/api/users/', routeHanlders.provideLocations);
+app.post('/api/getLocations', routeHanlders.provideLocations);
 
 app.get('*', function (req, res) {
   res.sendStatus(404);

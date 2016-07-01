@@ -15,9 +15,9 @@ client.on('connect', function() {
 //   console.log('1st result is', result);
 // });
 
-client.hgetall('4', (err, result) => {
-  console.log('2nd result is', result);
-});
+// client.hgetall('4', (err, result) => {
+//   console.log('2nd result is', result);
+// });
 
 module.exports = client;
 

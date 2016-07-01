@@ -44,13 +44,20 @@ module.exports = {
   },
   provideLocations: (req, res) => {
     // req.body will provide ids
-    const ids = [1, 4];
+    console.log('req.body is-----------', req.body);
+    // res.sendStatus(200);
+    const ids = req.body.basicFollows || [1, 4];
     async.map(ids, getData, (err, allResults) => {
       if (err) {
         console.log(err);
       }
       console.log('payload is: ', allResults);
-      res.sendStatus(200);
+      const cleanResults = {};
+      allResults.forEach(obj => {
+        const key = Object.keys(obj);
+        cleanResults[key] = obj[key];
+      });
+      res.send(cleanResults);
     });
   },
 };

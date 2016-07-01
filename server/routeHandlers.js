@@ -11,14 +11,14 @@ const getData = (id, cb) => {
 
 module.exports = {
   updateLocation: (req, res) => {
-    console.log('req.body coords is: ', req.body.location.coords);
-    console.log('req.body time stamp is: ', req.body.location.timestamp);
-    console.log('req.body activty is: ', req.body.location.activity);
+    // console.log('req.body coords is: ', req.body.location.coords);
+    // console.log('req.body time stamp is: ', req.body.location.timestamp);
+    // console.log('req.body activty is: ', req.body.location.activity);
     const { coords, activty, timestamp, is_moving } = req.body.location;
     // some userId
     const userId = req.params.userId;
     console.log('userId is: ', userId);
-    db.hgetall('4', (err, object) => {
+    db.hgetall(userId, (err, object) => {
       console.log('object was: ', object);
       if (object) {
         db.hmset(userId, {

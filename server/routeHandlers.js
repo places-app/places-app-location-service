@@ -29,7 +29,7 @@ module.exports = {
             currLng: coords.longitude,
             prevLat: object.currLat,
             prevLng: object.currLng,
-            udpatedAt: new Date(),
+            updatedAt: new Date(),
             //etc
           });
         }
@@ -39,7 +39,7 @@ module.exports = {
           currLng: coords.longitude,
           prevLat: '',
           prevLng: '',
-          udpatedAt: new Date(),
+          updatedAt: new Date(),
           //etc
         });
       }

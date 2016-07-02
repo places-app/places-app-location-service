@@ -18,17 +18,21 @@ module.exports = {
     // some userId
     const userId = req.params.userId;
     console.log('userId is: ', userId);
+    console.log('lat and lng are: ', coords.latitude, coords.longitude);
     db.hgetall(userId, (err, object) => {
-      console.log('object was: ', object);
+      // console.log('object was: ', object);
       if (object) {
-        db.hmset(userId, {
-          currLat: coords.latitude,
-          currLng: coords.longitude,
-          prevLat: object.currLat,
-          prevLng: object.currLng,
-          udpatedAt: new Date(),
-          //etc
-        });
+        if (+object.currLat !== +coords.latitude || +object.currLng !== +coords.longitude) {
+          console.log('ACTUALLY UPDATING-----------');
+          db.hmset(userId, {
+            currLat: coords.latitude,
+            currLng: coords.longitude,
+            prevLat: object.currLat,
+            prevLng: object.currLng,
+            udpatedAt: new Date(),
+            //etc
+          });
+        }
       } else {
         db.hmset(userId, {
           currLat: coords.latitude,
@@ -44,14 +48,12 @@ module.exports = {
   },
   provideLocations: (req, res) => {
     // req.body will provide ids
-    console.log('req.body is-----------', req.body);
     // res.sendStatus(200);
-    const ids = req.body.basicFollows || [1, 4];
+    const ids = req.body.basicFollows;
     async.map(ids, getData, (err, allResults) => {
       if (err) {
         console.log(err);
       }
-      console.log('payload is: ', allResults);
       const cleanResults = {};
       allResults.forEach(obj => {
         const key = Object.keys(obj);

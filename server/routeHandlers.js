@@ -11,14 +11,14 @@ const getData = (id, cb) => {
 
 module.exports = {
   updateLocation: (req, res) => {
-    // console.log('req.body coords is: ', req.body.location.coords);
+    console.log('req.body coords is: ', req.body.location.coords);
     // console.log('req.body time stamp is: ', req.body.location.timestamp);
-    // console.log('req.body activty is: ', req.body.location.activity);
-    const { coords, activty, timestamp, is_moving } = req.body.location;
+    console.log('req.body activty is: ', req.body.location.activity);
+    const { coords, activity, timestamp, is_moving } = req.body.location;
     // some userId
     const userId = req.params.userId;
     console.log('userId is: ', userId);
-    console.log('lat and lng are: ', coords.latitude, coords.longitude);
+    // console.log('lat and lng are: ', coords.latitude, coords.longitude);
     db.hgetall(userId, (err, object) => {
       // console.log('object was: ', object);
       if (object) {
@@ -29,9 +29,14 @@ module.exports = {
             currLng: coords.longitude,
             prevLat: object.currLat,
             prevLng: object.currLng,
-            updatedAt: new Date(),
-            //etc
+            locUpdatedAt: new Date(),
           });
+          if (activity.confidence > 50) {
+            db.hmset(userId, {
+              activity: activity.type,
+              activityUpdateAt: new Date(),
+            });
+          }
         }
       } else {
         db.hmset(userId, {
@@ -39,8 +44,9 @@ module.exports = {
           currLng: coords.longitude,
           prevLat: '',
           prevLng: '',
-          updatedAt: new Date(),
-          //etc
+          locUpdatedAt: new Date(),
+          activity: '',
+          activityUpdateAt: new Date(),
         });
       }
     });

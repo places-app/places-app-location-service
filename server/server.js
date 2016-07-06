@@ -5,7 +5,8 @@ if (process.env.NODE_ENV === 'development') {
   require('dotenv').config({ path: './env/production.env' });
 }
 
-const routeHanlders = require('./routeHandlers');
+
+const routeHandlers = require('./routeHandlers');
 
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -20,9 +21,9 @@ app.get('/', function (req, res) {
   res.send('Hello World!');
 });
 
-app.post('/api/users/:userId/location', routeHanlders.updateLocation);
+app.post('/api/users/:userId/location', routeHandlers.updateLocation);
 
-app.post('/api/getLocations', routeHanlders.provideLocations);
+app.post('/api/getLocations', routeHandlers.provideLocations);
 
 app.get('*', function (req, res) {
   res.sendStatus(404);

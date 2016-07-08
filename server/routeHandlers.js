@@ -11,19 +11,15 @@ const getData = (id, cb) => {
 
 module.exports = {
   updateLocation: (req, res) => {
-    console.log('req.body coords is: ', req.body.location.coords);
-    // console.log('req.body time stamp is: ', req.body.location.timestamp);
-    console.log('req.body activty is: ', req.body.location.activity);
+    console.log('---------current time stamp is----------: ', new Date());
+    console.log('coords are: ', req.body.location.coords);
+    console.log('activity is: ', req.body.location.activity);
     const { coords, activity, timestamp, is_moving } = req.body.location;
-    // some userId
     const userId = req.params.userId;
     console.log('userId is: ', userId);
-    // console.log('lat and lng are: ', coords.latitude, coords.longitude);
     db.hgetall(userId, (err, object) => {
-      // console.log('object was: ', object);
       if (object) {
         if (+object.currLat !== +coords.latitude || +object.currLng !== +coords.longitude) {
-          console.log('ACTUALLY UPDATING-----------');
           db.hmset(userId, {
             currLat: coords.latitude,
             currLng: coords.longitude,

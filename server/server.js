@@ -5,17 +5,13 @@ if (process.env.NODE_ENV === 'development') {
   require('dotenv').config({ path: './env/production.env' });
 }
 
-
+const middleware = require('./middleware');
 const routeHandlers = require('./routeHandlers');
 
-const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
-const logger = require('morgan');
 
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+middleware(app);
 
 app.get('/', function (req, res) {
   res.send('Hello World!');

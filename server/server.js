@@ -13,24 +13,21 @@ const app = express();
 
 middleware(app);
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.get('/', (req, res) => res.send('Hello World!')
+  );
 
 app.post('/api/users/:userId/location', routeHandlers.updateLocation);
 
 app.post('/api/getLocations', routeHandlers.provideLocations);
 
-app.get('*', function (req, res) {
-  res.sendStatus(404);
-});
+app.get('*', (req, res) => res.sendStatus(404)
+  );
 
-function startApp() {
+const startApp = () =>
   app.listen(Number(process.env.PORT), process.env.HOST, () => {
     console.log(
       `${process.env.APP_NAME} is listening at ${process.env.HOST} on port ${process.env.PORT}`
     );
   });
-}
 
 startApp();

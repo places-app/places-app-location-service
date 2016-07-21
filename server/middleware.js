@@ -1,10 +1,11 @@
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 
-// configure IP filtering to secure access
+// configure IP filtering to ensure only explicit servers have access
 const ipfilter = require('express-ipfilter');
-const ips = ['104.236.72.252'];
 
+
+const ips = [process.env.API_SERVER_IP];
 
 module.exports = function middleware(app) {
   app.use(logger('dev'));

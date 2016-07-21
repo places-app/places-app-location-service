@@ -14,7 +14,7 @@ module.exports = {
     console.log('---------current time stamp is----------: ', new Date());
     console.log('coords are: ', req.body.location.coords);
     console.log('activity is: ', req.body.location.activity);
-    const { coords, activity, timestamp, is_moving } = req.body.location;
+    const { coords, activity } = req.body.location;
     const userId = req.params.userId;
     console.log('userId is: ', userId);
     db.hgetall(userId, (err, object) => {

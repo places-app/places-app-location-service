@@ -1,19 +1,17 @@
-var redis = require('redis');
+const redis = require('redis');
+let client;
 
+if (process.env.NODE_ENV === 'production') {
+  client = redis.createClient('6379', 'redis');
+} else {
+  client = redis.createClient();
+}
 
-console.log(process.env.REDIS_PORT_6379_TCP_ADDR + ':' + process.env.REDIS_PORT_6379_TCP_PORT);
+client.on('connect', () => console.log('redis server connected')
+  );
 
-
-var client = redis.createClient('6379', 'redis');
-
-
-
-client.on('connect', function() {
-    console.log('redis server connected');
-});
-client.on('error', function(err) {
-    console.log('Redis error: ', err);
-});
+client.on('error', (err) => console.log('Redis error: ', err)
+  );
 
 
 module.exports = client;

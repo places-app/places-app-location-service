@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "if [ ! -d node_modules ]; then npm install; fi",
     "start": "NODE_ENV=development nodemon server/server.js",
-    "prod": "NODE_ENV=production node server/server.js"
+    "prod": "npm run prestart && NODE_ENV=production node server/server.js"
   },
   "repository": {
     "type": "git",

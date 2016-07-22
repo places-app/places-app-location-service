@@ -53,7 +53,16 @@ The location update is expecting a body of the following format:
 The getLocations route expects a JSON body having an array of user ids stored under the basicFollows key. For example, if wanting location info for users with ids: 6, 12, and 17:
 `{basicFollows: [6, 12, 17]}`
 
-Getting started 
+##Team
 
+Location Service Developer: Adam Lessen
 
-Contributing 
+Product Owner: Adam Lessen
+
+Scrum Master: Sepehr Vakili
+
+Development Team Members: Jordan Tepper, Sepehr Vakili, Andrew Phavichitr, Adam Lessen
+
+##Contributing
+
+See CONTRIBUTING.md for contribution guidelines.

@@ -3,9 +3,39 @@
 What it does 
 This location service is a lean nodejs server with 2 main API routes:
 
+## Getting Started 
+Clone and install dependencies:
 
+`$npm install`
 
+If staring the server locally:
 
+Create env/development.env and set environment variables. Follow example in .env.sample.
+
+Start the redis server
+
+`$ redis-server`
+
+Fire up the server
+
+`$ npm start`
+
+Or if using docker:
+
+Create env/production.env and set environment variables. Follow example in .env.sample. SET HOST TO web for docker compose to work.
+
+Open up the Docker quick start terminal, and ensure connected to the corret Docker machine with:
+
+`$ docker-machine ls`
+
+Then, to start, simply:
+
+`$ docker-compose up -d`
+
+Start hitting the API routes to store / retrieve users' location info
+
+## Tech
+node / express server with a redis database for storing and retrieving a user's last two locations
 
 ## Directory Layout
 

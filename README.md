@@ -1,7 +1,6 @@
 # location-service
 
-What it does 
-This location service is a lean nodejs server with 2 main API routes:
+This service is a lean server to store and retrieve users' current and previous location 
 
 ## Getting Started 
 Clone and install dependencies:

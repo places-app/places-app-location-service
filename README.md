@@ -2,6 +2,7 @@
 
 This service is a lean server to store and retrieve users' current and previous location 
 
+
 ## Getting Started 
 Clone the repo down. 
 

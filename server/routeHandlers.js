@@ -1,8 +1,10 @@
 const db = require('./db/db');
 const async = require('async');
 
+/* helper function to async retreive user location from db */
 const getData = (id, cb) => {
   db.hgetall(id, (err, object) => {
+    // don't worry about error condition - if err, location info for that user will be missing
     const userLoc = {};
     userLoc[id] = object;
     cb(null, userLoc);
@@ -46,22 +48,24 @@ module.exports = {
         });
       }
     });
+    // don't worry about error condition - mobile client will keep sending location
     res.sendStatus(200);
   },
   provideLocations: (req, res) => {
     // req.body will provide ids
-    // res.sendStatus(200);
     const ids = req.body.basicFollows;
     async.map(ids, getData, (err, allResults) => {
       if (err) {
         console.log(err);
+        res.sendStatus(500);
+      } else {
+        const cleanResults = {};
+        allResults.forEach(obj => {
+          const key = Object.keys(obj);
+          cleanResults[key] = obj[key];
+        });
+        res.send(cleanResults);
       }
-      const cleanResults = {};
-      allResults.forEach(obj => {
-        const key = Object.keys(obj);
-        cleanResults[key] = obj[key];
-      });
-      res.send(cleanResults);
     });
   },
 };

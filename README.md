@@ -3,11 +3,13 @@
 This service is a lean server to store and retrieve users' current and previous location 
 
 ## Getting Started 
-Clone and install dependencies:
+Clone the repo down. 
 
-`$npm install`
+Install dependencies:
 
-If staring the server locally:
+`$ npm install`
+
+#### If staring the server locally:
 
 Create env/development.env and set environment variables. Follow example in .env.sample.
 
@@ -19,7 +21,7 @@ Fire up the server
 
 `$ npm start`
 
-Or if using docker:
+#### Or if using docker:
 
 Create env/production.env and set environment variables. Follow example in .env.sample. SET HOST TO web for docker compose to work.
 
